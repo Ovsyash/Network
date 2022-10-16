@@ -25,25 +25,28 @@ class Cats {
         catsApi = retrofit.create(CatsApi::class.java)
     }
 
-    fun fetchNews() : LiveData<List<CatsItem>> {
+    fun fetchNews(): LiveData<List<CatsItem>> {
         val responseLiveData: MutableLiveData<List<CatsItem>> = MutableLiveData()
-        val catsRequest: Call<com.example.network.data.cats.CatsResponse> = catsApi.fetchCats()
+        val catsRequest: Call<List<CatsItem>> = catsApi.fetchCats()
 
-        catsRequest.enqueue(object : Callback<com.example.network.data.cats.CatsResponse> {
+            catsRequest.enqueue(object : Callback<List<CatsItem>> {
 
-            override fun onFailure(call: Call<com.example.network.data.cats.CatsResponse>, t: Throwable) {
-                Log.e(TAG, "Failed to news", t)
-            }
+                override fun onFailure(call: Call<List<CatsItem>>, t: Throwable) {
+                    Log.e(TAG, "Failed to cats", t)
+                }
 
-            override fun onResponse(call: Call<com.example.network.data.cats.CatsResponse>, response: Response<com.example.network.data.cats.CatsResponse>) {
-                Log.d(TAG, "Response received")
-                val catsResponse: com.example.network.data.cats.CatsResponse? = response.body()
-                val catsItems: List<CatsItem> = catsResponse?.catsItem
-                    ?: mutableListOf()
+                override fun onResponse(
+                    call: Call<List<CatsItem>>,
+                    response: Response<List<CatsItem>>
+                ) {
+                    Log.d(TAG, "Response received")
+                    val catsResponse: List<CatsItem>? = response.body()
+                    val catsItems: List<CatsItem> = catsResponse
+                        ?: mutableListOf()
 
-                responseLiveData.value = catsItems
-            }
-        })
+                    responseLiveData.value = catsItems
+                }
+            })
 
         return responseLiveData
     }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
     <ImageView
@@ -12,13 +12,5 @@
         android:id="@+id/image_cat"
         android:contentDescription="cat"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/label_name"
-        android:layout_gravity="bottom|center_horizontal"
-        android:textSize="24sp"
-        android:text="@string/cat_1"/>
 
 </FrameLayout>
