@@ -56,6 +56,7 @@ class CatsFragment : Fragment() {
         private lateinit var catsItem: CatsItem
 
         fun bind(cats: CatsItem) = with(bindingClass) {
+            labelName.text = cats.id
 
             Glide.with(imageCat)
                 .load(cats.url)
